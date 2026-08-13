@@ -7,7 +7,9 @@ authors = [
     { name = "Sinchana-Rai", email = "sinchana.srai@gmail.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "dotenv>=0.9.9",
+]
 
 [project.scripts]
 capstone-931 = "capstone_931:main"
