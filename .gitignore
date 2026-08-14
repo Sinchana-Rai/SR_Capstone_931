@@ -11,3 +11,20 @@ wheels/
 
 
 .env
+
+# Testing / linting / type-checking caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Coverage reports
+.coverage
+htmlcov/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Editor-specific (only if you don't want to share workspace settings)
+.vscode/
+.idea/

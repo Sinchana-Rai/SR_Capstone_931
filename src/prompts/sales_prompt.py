@@ -64,17 +64,17 @@ Target Customer:
 
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    test_prompt = sales_prompt.invoke(
-        {
-            "product_name": "Snowflake Data Cloud",
-            "company_url": "https://www.target.com",
-            "product_category": "Cloud Data Platform",
-            "competitors": "Databricks, Google BigQuery",
-            "value_proposition": "Helps organizations store, analyze, and share data using a scalable cloud platform.",
-            "target_customer": "Chief Data Officer",
-        }
-    )
+#     test_prompt = sales_prompt.invoke(
+#         {
+#             "product_name": "Snowflake Data Cloud",
+#             "company_url": "https://www.target.com",
+#             "product_category": "Cloud Data Platform",
+#             "competitors": "Databricks, Google BigQuery",
+#             "value_proposition": "Helps organizations store, analyze, and share data using a scalable cloud platform.",
+#             "target_customer": "Chief Data Officer",
+#         }
+#     )
 
-    print(test_prompt)
+#     print(test_prompt)
