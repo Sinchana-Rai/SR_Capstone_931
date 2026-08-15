@@ -14,3 +14,9 @@ MODEL_ID = "llama-3.3-70b-versatile"
 print("Configuration loaded successfully!")
 print(f"API Key present: {bool(GROQ_API_KEY)}")
 print(f"Model: {MODEL_ID}")
+
+
+if __name__ == "__main__":
+    print("Configuration loaded successfully!")
+    print(f"API Key present: {bool(GROQ_API_KEY)}")
+    print(f"Model: {MODEL_ID}")
