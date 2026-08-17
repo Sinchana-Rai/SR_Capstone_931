@@ -1,0 +1,33 @@
+from src.workflows.sales_workflow import run_sales_workflow
+
+
+result = run_sales_workflow(
+    product_name="Snowflake Data Cloud",
+    company_url="https://www.target.com",
+    product_category="Cloud Data Platform",
+    competitors="Databricks, Google BigQuery",
+    value_proposition=(
+        "Helps organizations store, analyze, and share data "
+        "using a scalable cloud platform."
+    ),
+    target_customer="Chief Data Officer",
+)
+
+
+print("Sales Agent result")
+print("*" *40 + "\n")
+
+print(result["sales_analysis"])
+
+print("Research agent result")
+print("*" *40 + "\n")
+
+print(result["research_analysis"])
+
+print("Workflow Info")
+print("*" *40 + "\n")
+
+print(
+    f"Website characters processed: "
+    f"{len(result['website_text'])}"
+)

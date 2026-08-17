@@ -3,6 +3,7 @@ from settings import MODEL_ID
 from langchain_core.output_parsers import StrOutputParser
 from src.prompts.sales_prompt import sales_prompt
 
+from src.utils.output_cleaner import clean_llm_output
 
 # Create the Groq model
 model = ChatGroq(model=MODEL_ID, temperature=0)
@@ -20,7 +21,7 @@ def run_sales_agent(product_name, company_url, product_category,
     Run the Sales Intake Agent and return the analysis.
     """
 
-    result = sales_chain.invoke(
+    res = sales_chain.invoke(
         {
             "product_name": product_name,
             "company_url": company_url,
@@ -30,5 +31,5 @@ def run_sales_agent(product_name, company_url, product_category,
             "target_customer": target_customer,
         }
     )
-
+    result = clean_llm_output(res)
     return result
