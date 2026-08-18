@@ -16,13 +16,15 @@ result = run_sales_workflow(
 
 print("Sales Agent result")
 print("*" *40 + "\n")
-
 print(result["sales_analysis"])
 
 print("Research agent result")
 print("*" *40 + "\n")
-
 print(result["research_analysis"])
+
+print("\nCompetitor agent result")
+print("*" *40 + "\n")
+print(result["competitor_analysis"])
 
 print("Workflow Info")
 print("*" *40 + "\n")

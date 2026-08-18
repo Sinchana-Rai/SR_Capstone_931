@@ -39,6 +39,10 @@ Rules:
 - If a statement depends on general product knowledge rather than the
   supplied prospect research, label it as "General market context".
 - Do not present general market knowledge as evidence about the prospect.
+- Separate statements into:
+  a) Prospect-specific evidence
+  b) General market context
+  c) Areas to investigate
 """
         ),
         (

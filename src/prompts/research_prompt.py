@@ -31,6 +31,8 @@ Rules:
   "Not found in provided website data."
 - Do not make the final sales recommendation.
 - Keep the analysis concise and factual.
+- Clearly label any inferred business need as "Inference".
+- Do not present inferred needs as confirmed company strategy.
 """
         ),
         (
