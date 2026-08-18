@@ -36,6 +36,9 @@ Rules:
 - You MUST complete all 6 sections.
 - Do not stop after a section heading.
 - Each section should contain at least one complete sentence.
+- If a statement depends on general product knowledge rather than the
+  supplied prospect research, label it as "General market context".
+- Do not present general market knowledge as evidence about the prospect.
 """
         ),
         (
