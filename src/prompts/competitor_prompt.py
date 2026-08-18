@@ -33,6 +33,9 @@ Rules:
 - Clearly distinguish facts from possible areas to investigate.
 - Do not make the final sales recommendation.
 - Keep the response concise.
+- You MUST complete all 6 sections.
+- Do not stop after a section heading.
+- Each section should contain at least one complete sentence.
 """
         ),
         (
