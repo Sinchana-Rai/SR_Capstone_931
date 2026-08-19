@@ -2,6 +2,8 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
+from urllib.parse import urljoin, urlparse
+
 def clean_website_text(text):
     """
     Clean extracted website text by removing repeated
@@ -111,3 +113,76 @@ SOURCE CONTENT:
 
     return "\n".join(combined_text)
 
+
+def discover_research_links(base_url, max_links=10):
+    """
+    Discover useful internal corporate links from a website.
+
+    Args:
+        base_url (str): Corporate/company website.
+        max_links (int): Maximum number of useful links returned.
+
+    Returns:
+        list: Relevant internal URLs.
+    """
+
+    keywords = [
+        "leadership",
+        "executive",
+        "company",
+        "about",
+        "news",
+        "press",
+        "investor",
+        "strategy",
+        "technology",
+        "innovation",
+    ]
+
+    try:
+        response = requests.get(
+            base_url,
+            timeout=10,
+            headers={"User-Agent": "Mozilla/5.0"}
+        )
+
+        response.raise_for_status()
+
+        soup = BeautifulSoup(response.text, "html.parser")
+
+        discovered_links = []
+
+        base_domain = urlparse(base_url).netloc
+
+        for link in soup.find_all("a", href=True):
+
+            href = link.get("href")
+
+            full_url = urljoin(base_url, href)
+
+            link_text = link.get_text(separator=" ", strip=True).lower()
+
+            full_url_lower = full_url.lower()
+
+            # Only keep links from the same domain
+            if urlparse(full_url).netloc != base_domain:
+                continue
+
+            # Check whether URL or link text contains one of our research keywords
+            relevant = any(
+                keyword in full_url_lower
+                or keyword in link_text
+                for keyword in keywords
+            )
+
+            if relevant and full_url not in discovered_links:
+                discovered_links.append(full_url)
+
+            if len(discovered_links) >= max_links:
+                break
+
+        return discovered_links
+
+    except requests.RequestException as error:
+        print(f"Error discovering links: {error}")
+        return []
