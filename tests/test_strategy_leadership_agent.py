@@ -1,20 +1,15 @@
-from src.agents.strategy_leadership_agent import (
-    run_strategy_leadership_agent
-)
+from src.agents.strategy_leadership_agent import (run_strategy_leadership_agent)
 
-from src.tools.webscraper import fetch_multiple_websites
+from src.tools.webscraper import build_company_research_data
 
 
-urls = [
-    "https://www.target.com",
-    "https://corporate.target.com",
-]
+corporate_url = "https://corporate.target.com"
 
 
-print("\nFetching strategy and leadership sources...\n")
+print("\nBuilding company research data...\n")
 
 
-source_data = fetch_multiple_websites(urls)
+source_data = build_company_research_data(corporate_url=corporate_url, max_links=4, max_char_per_page=4000)
 
 
 print(f"\nSource data collected: "
@@ -28,7 +23,7 @@ result = run_strategy_leadership_agent(
     product_name="Snowflake Data Cloud",
     product_category="Cloud Data Platform",
     target_customer="Chief Data Officer",
-    company_url="https://www.target.com",
+    company_url=corporate_url,
     source_data=source_data,
 )
 

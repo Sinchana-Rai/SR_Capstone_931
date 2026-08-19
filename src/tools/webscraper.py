@@ -116,43 +116,40 @@ SOURCE CONTENT:
 
 def discover_research_links(base_url, max_links=10):
     """
-    Discover useful internal corporate links from a website.
+    Discover and prioritize useful internal corporate links.
 
     Args:
         base_url (str): Corporate/company website.
         max_links (int): Maximum number of useful links returned.
 
     Returns:
-        list: Relevant internal URLs.
+        list: Relevant internal URLs ranked by research value.
     """
 
-    keywords = [
-        "leadership",
-        "executive",
-        "company",
-        "about",
-        "news",
-        "press",
-        "investor",
-        "strategy",
-        "technology",
-        "innovation",
-    ]
+    keyword_weights = {
+        "leadership": 14,
+        "executive": 10,
+        "investor": 9,
+        "news": 9,
+        "press": 9,
+        "technology": 8,
+        "innovation": 8,
+        "strategy": 12,
+        "about": 5,
+        "company": 5,
+    }
 
     try:
-        response = requests.get(
-            base_url,
-            timeout=10,
-            headers={"User-Agent": "Mozilla/5.0"}
-        )
+        response = requests.get(base_url, timeout=10,
+            headers={"User-Agent": "Mozilla/5.0"})
 
         response.raise_for_status()
 
         soup = BeautifulSoup(response.text, "html.parser")
 
-        discovered_links = []
-
         base_domain = urlparse(base_url).netloc
+
+        scored_links = []
 
         for link in soup.find_all("a", href=True):
 
@@ -160,29 +157,69 @@ def discover_research_links(base_url, max_links=10):
 
             full_url = urljoin(base_url, href)
 
-            link_text = link.get_text(separator=" ", strip=True).lower()
-
-            full_url_lower = full_url.lower()
-
-            # Only keep links from the same domain
+            # Ignore links outside the same domain
             if urlparse(full_url).netloc != base_domain:
                 continue
 
-            # Check whether URL or link text contains one of our research keywords
-            relevant = any(
-                keyword in full_url_lower
-                or keyword in link_text
-                for keyword in keywords
-            )
+            link_text = link.get_text(separator=" ", strip=True).lower()
 
-            if relevant and full_url not in discovered_links:
-                discovered_links.append(full_url)
+            searchable_text = (full_url.lower() + " " + link_text)
 
-            if len(discovered_links) >= max_links:
-                break
+            score = 0
 
-        return discovered_links
+            for keyword, weight in keyword_weights.items():
+                if keyword in searchable_text:
+                    score += weight
+
+            if score > 0:
+                scored_links.append((full_url, score))
+
+        # Remove duplicate URLs
+        unique_links = {}
+
+        for url, score in scored_links:
+            if (url not in unique_links
+                or score > unique_links[url]):
+                unique_links[url] = score
+
+        # Sort highest score first
+        sorted_links = sorted(unique_links.items(), key=lambda item: item[1], reverse=True)
+
+        # Return only URLs
+        return [url
+            for url, score in sorted_links[:max_links]]
 
     except requests.RequestException as error:
         print(f"Error discovering links: {error}")
         return []
+
+
+def build_company_research_data(corporate_url, max_links=4, max_char_per_page=4000, max_total_characters=12500):
+    """
+    Discover useful corporate pages and collect their text.
+
+    Args:
+        corporate_url (str): Corporate website URL.
+        max_links (int): Maximum pages to research.
+        max_char_per_page (int): Maximum characters from each page.
+
+    Returns:
+        str: Combined research source data.
+    """
+
+    links = discover_research_links(corporate_url, max_links=max_links)
+
+    # Always include the corporate homepage
+    urls = [corporate_url]
+
+    for link in links:
+        if link not in urls:
+            urls.append(link)
+
+    print(f"Researching {len(urls)} corporate pages...")
+
+    source_data = fetch_multiple_websites(urls, max_char_per_page=max_char_per_page)
+
+    # Prevent very large prompts from being sent to Groq
+    source_data = source_data[:max_total_characters]
+    return source_data

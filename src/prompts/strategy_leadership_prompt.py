@@ -44,6 +44,8 @@ Rules:
 - You MUST complete all 9 sections.
 - Do not stop after a bullet or section heading.
 - Section 9 must list the source URLs exactly as provided.
+- Do not imply that a company-wide investment amount is dedicated
+  entirely to technology unless the source explicitly states that.
 """
         ),
         (
