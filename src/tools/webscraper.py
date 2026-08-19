@@ -73,3 +73,41 @@ def fetch_website_text(url, max_char= 15000):
     except requests.RequestException as error:
         return f"Error retrieving website: {error}"
 
+
+def fetch_multiple_websites(urls, max_char_per_page=10000):
+    """
+    Fetch and combine text from multiple website URLs.
+
+    Args:
+        urls (list): List of website URLs.
+        max_char_per_page (int): Maximum characters per page.
+
+    Returns:
+        str: Combined website text with source URLs.
+    """
+
+    combined_text = []
+
+    for url in urls:
+
+        print(f"Fetching: {url}")
+
+        page_text = fetch_website_text(
+            url,
+            max_char=max_char_per_page
+        )
+
+        source_block = f"""
+SOURCE URL:
+{url}
+
+SOURCE CONTENT:
+{page_text}
+
+----------------------------------------
+"""
+
+        combined_text.append(source_block)
+
+    return "\n".join(combined_text)
+
