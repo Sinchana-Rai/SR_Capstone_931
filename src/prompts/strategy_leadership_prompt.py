@@ -34,13 +34,16 @@ Rules:
 - Label inferred observations as "Inference".
 - If information is unavailable, state:
   "Not found in provided source data."
-- Do not claim that an executive supports or uses the product being sold
-  unless the source explicitly states it.
+- Do not claim that an executive supports or uses the product being sold unless the source explicitly states it.
+- Do not assume that the named target-customer role exists at the prospect company unless the provided sources confirm it.
 - Preserve the source URLs associated with the information.
 - List only source URLs that were actually provided.
 - Do not make a final sales recommendation.
 - Complete all 9 sections.
 - Keep the response concise and factual.
+- You MUST complete all 9 sections.
+- Do not stop after a bullet or section heading.
+- Section 9 must list the source URLs exactly as provided.
 """
         ),
         (

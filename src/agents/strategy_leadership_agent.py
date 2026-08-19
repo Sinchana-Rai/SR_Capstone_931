@@ -11,7 +11,7 @@ from src.utils.output_cleaner import clean_llm_output
 model = ChatGroq(
     model=MODEL_ID,
     temperature=0,
-    max_tokens=3000
+    max_tokens=5000
 )
 
 
