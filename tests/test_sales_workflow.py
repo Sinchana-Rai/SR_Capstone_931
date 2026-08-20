@@ -4,6 +4,7 @@ from src.workflows.sales_workflow import run_sales_workflow
 result = run_sales_workflow(
     product_name="Snowflake Data Cloud",
     company_url="https://www.target.com",
+    corporate_url="https://corporate.target.com",
     product_category="Cloud Data Platform",
     competitors="Databricks, Google BigQuery",
     value_proposition=(

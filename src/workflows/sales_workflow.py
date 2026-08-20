@@ -10,6 +10,7 @@ from src.agents.final_report_agent import run_final_report_agent
 def run_sales_workflow(
     product_name,
     company_url,
+    corporate_url,
     product_category,
     competitors,
     value_proposition,
@@ -59,7 +60,7 @@ def run_sales_workflow(
 
     print("Step 5: Building corporate research data...")
 
-    corporate_url = "https://corporate.target.com"
+    # corporate_url = "https://corporate.target.com"
 
     corporate_source_data = build_company_research_data(
         corporate_url=corporate_url,
