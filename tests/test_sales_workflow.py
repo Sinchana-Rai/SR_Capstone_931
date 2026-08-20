@@ -30,6 +30,10 @@ print("\nStrategy & Leadership Agent result")
 print("*" *40 + "\n")
 print(result["strategy_leadership_analysis"])
 
+print("\nFinal Sales Intelligence Report")
+print("*" *40 + "\n")
+print(result["final_report"])
+
 print("Workflow Info")
 print("*" *40 + "\n")
 

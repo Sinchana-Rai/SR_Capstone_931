@@ -39,6 +39,9 @@ Rules:
 - Do not assume the prospect uses legacy systems unless the provided research confirms it.
 - Preserve executive titles exactly as provided in the research.
 - When information is unknown, describe it as unknown rather than converting the absence of evidence into a sales conclusion.
+- Do not interpret general corporate investment or technology spending
+  as confirmed budget availability for the product being sold.
+- Treat general investment levels as sales signals, not confirmed purchasing budgets.
 """
         ),
         (

@@ -7,7 +7,12 @@ from settings import MODEL_ID
 from src.prompts.research_prompt import research_prompt
 
 # Create Groq model
-model = ChatGroq(model=MODEL_ID, temperature=0)
+model = ChatGroq(
+    model=MODEL_ID,
+    temperature=0,
+    max_tokens=2000,
+    reasoning_effort="none"
+)
 
 #convert the model respons into normal text
 parser = StrOutputParser()
