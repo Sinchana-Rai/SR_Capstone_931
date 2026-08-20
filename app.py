@@ -1,4 +1,5 @@
 import streamlit as st
+from src.workflows.sales_workflow import run_sales_workflow
 
 
 st.set_page_config(
@@ -64,14 +65,49 @@ generate_report = st.button(
 
 if generate_report:
 
-    st.success("Input received successfully!")
+    # Basic input validation
+    if not product_name.strip():
+        st.error("Please enter a Product Name.")
 
-    st.subheader("Opportunity Summary")
+    elif not company_url.strip():
+        st.error("Please enter a Company URL.")
 
-    st.write(f"**Product:** {product_name}")
-    st.write(f"**Company:** {company_url}")
-    st.write(f"**Corporate Website:** {corporate_url}")
-    st.write(f"**Category:** {product_category}")
-    st.write(f"**Competitors:** {competitors}")
-    st.write(f"**Target Customer:** {target_customer}")
-    st.write(f"**Value Proposition:** {value_proposition}")
+    elif not corporate_url.strip():
+        st.error("Please enter a Corporate Website.")
+
+    elif not product_category.strip():
+        st.error("Please enter a Product Category.")
+
+    elif not target_customer.strip():
+        st.error("Please enter a Target Customer.")
+
+    else:
+
+        try:
+
+            with st.spinner(
+                "Researching the company and generating "
+                "the sales intelligence report..."
+            ):
+
+                result = run_sales_workflow(
+                    product_name=product_name,
+                    company_url=company_url,
+                    corporate_url=corporate_url,
+                    product_category=product_category,
+                    competitors=competitors,
+                    value_proposition=value_proposition,
+                    target_customer=target_customer,
+                )
+
+            st.success("Sales Intelligence Report generated successfully!")
+
+            st.divider()
+
+            st.markdown(result["final_report"])
+
+        except Exception as error:
+
+            st.error("An error occurred while generating the report.")
+
+            st.exception(error)
