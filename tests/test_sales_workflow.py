@@ -26,10 +26,19 @@ print("\nCompetitor agent result")
 print("*" *40 + "\n")
 print(result["competitor_analysis"])
 
+print("\nStrategy & Leadership Agent result")
+print("*" *40 + "\n")
+print(result["strategy_leadership_analysis"])
+
 print("Workflow Info")
 print("*" *40 + "\n")
 
 print(
     f"Website characters processed: "
     f"{len(result['website_text'])}"
+)
+
+print(
+    f"Corporate research characters processed: "
+    f"{len(result['corporate_source_data'])}"
 )

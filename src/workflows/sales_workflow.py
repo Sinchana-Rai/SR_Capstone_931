@@ -1,7 +1,9 @@
 from src.agents.sales_agent import run_sales_agent
 from src.agents.research_agent import run_research_agent
-from src.tools.webscraper import fetch_website_text
 from src.agents.competitor_agent import run_competitor_agent
+
+from src.agents.strategy_leadership_agent import (run_strategy_leadership_agent)
+from src.tools.webscraper import (fetch_website_text, build_company_research_data)
 
 
 def run_sales_workflow(
@@ -54,10 +56,32 @@ def run_sales_workflow(
         research_analysis=research_analysis,
     )
 
+    print("Step 5: Building corporate research data...")
+
+    corporate_url = "https://corporate.target.com"
+
+    corporate_source_data = build_company_research_data(
+        corporate_url=corporate_url,
+        max_links=4,
+        max_char_per_page=4000,
+        max_total_characters=12500,
+    )
+
+    print("Step 6: Running Strategy and Leadership Agent...")
+
+    strategy_leadership_analysis = run_strategy_leadership_agent(
+        product_name=product_name,
+        product_category=product_category,
+        target_customer=target_customer,
+        company_url=corporate_url,
+        source_data=corporate_source_data,
+    )
 
     return {
         "sales_analysis": sales_analysis,
         "research_analysis": research_analysis,
         "competitor_analysis": competitor_analysis,
+        "strategy_leadership_analysis": strategy_leadership_analysis,
         "website_text": website_text,
+        "corporate_source_data": corporate_source_data,
     }
