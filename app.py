@@ -1,6 +1,20 @@
 import streamlit as st
 from src.workflows.sales_workflow import run_sales_workflow
+from urllib.parse import urlparse
 
+def is_valid_url(url):
+    """
+    Check whether a URL contains both a valid scheme
+    and network location.
+    """
+    try:
+        result = urlparse(url)
+
+        return (result.scheme in ["http", "https"] and bool(result.netloc))
+
+    except ValueError:
+        return False
+    
 
 st.set_page_config(
     page_title="Sales Intelligence Agent",
@@ -65,29 +79,64 @@ generate_report = st.button(
 
 if generate_report:
 
-    # Basic input validation
     if not product_name.strip():
-        st.error("Please enter a Product Name.")
+
+        st.error(
+            "Please enter a Product Name."
+        )
 
     elif not company_url.strip():
-        st.error("Please enter a Company URL.")
+
+        st.error(
+            "Please enter a Company URL."
+        )
+
+    elif not is_valid_url(company_url):
+
+        st.error(
+            "Please enter a valid Company URL "
+            "starting with http:// or https://."
+        )
 
     elif not corporate_url.strip():
-        st.error("Please enter a Corporate Website.")
+
+        st.error(
+            "Please enter a Corporate Website."
+        )
+
+    elif not is_valid_url(corporate_url):
+
+        st.error(
+            "Please enter a valid Corporate Website URL "
+            "starting with http:// or https://."
+        )
 
     elif not product_category.strip():
-        st.error("Please enter a Product Category.")
+
+        st.error(
+            "Please enter a Product Category."
+        )
+
+    elif not value_proposition.strip():
+
+        st.error(
+            "Please enter a Value Proposition."
+        )
 
     elif not target_customer.strip():
-        st.error("Please enter a Target Customer.")
+
+        st.error(
+            "Please enter a Target Customer."
+        )
 
     else:
 
         try:
 
             with st.spinner(
-                "Researching the company and generating "
-                "the sales intelligence report..."):
+                "Researching company data and generating "
+                "the intelligence report..."
+            ):
 
                 result = run_sales_workflow(
                     product_name=product_name,
@@ -164,6 +213,16 @@ if generate_report:
 
         except Exception as error:
 
-            st.error("An error occurred while generating the report.")
+            st.error(
+                "The report could not be generated."
+            )
 
-            st.exception(error)
+            st.write(
+                "Please verify the website URLs and try again."
+            )
+
+            with st.expander(
+                "Technical Error Details"
+            ):
+
+                st.exception(error)

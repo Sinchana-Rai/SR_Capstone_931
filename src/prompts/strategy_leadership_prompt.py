@@ -46,6 +46,10 @@ Rules:
 - Section 9 must list the source URLs exactly as provided.
 - Do not imply that a company-wide investment amount is dedicated
   entirely to technology unless the source explicitly states that.
+- Do not state that a named executive owns data-platform decisions
+  unless the provided source explicitly confirms that responsibility.
+- If an executive appears relevant only because of their title, label that conclusion as "Inference".
+- Do not interpret general technology investment as confirmed purchasing budget for the product being sold.
 """
         ),
         (

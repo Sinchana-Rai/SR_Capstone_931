@@ -42,6 +42,9 @@ Rules:
 - Do not interpret general corporate investment or technology spending
   as confirmed budget availability for the product being sold.
 - Treat general investment levels as sales signals, not confirmed purchasing budgets.
+- Label unconfirmed stakeholder ownership as "Inference".
+- Do not describe corporate investment as product budget unless the source explicitly identifies budget for the product category.
+- Use "Investment Signal" instead of "Budget Availability" when only general corporate investment is confirmed.
 """
         ),
         (

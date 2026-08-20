@@ -73,7 +73,9 @@ def fetch_website_text(url, max_char= 15000):
         return text  
 
     except requests.RequestException as error:
-        return f"Error retrieving website: {error}"
+        raise RuntimeError(
+            f"Unable to retrieve website: {url}. "
+            f"Details: {error}") from error
 
 
 def fetch_multiple_websites(urls, max_char_per_page=10000):
@@ -190,8 +192,9 @@ def discover_research_links(base_url, max_links=10):
             for url, score in sorted_links[:max_links]]
 
     except requests.RequestException as error:
-        print(f"Error discovering links: {error}")
-        return []
+        raise RuntimeError(
+            f"Unable to discover research links from "
+            f"{base_url}. Details: {error}") from error
 
 
 def build_company_research_data(corporate_url, max_links=4, max_char_per_page=4000, max_total_characters=12500):
