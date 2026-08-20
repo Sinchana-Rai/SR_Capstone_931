@@ -224,7 +224,9 @@ if generate_report:
             )
 
             st.write(
-                "Please verify the website URLs and try again."
+                "Please check the input values and try again. "
+                "The issue may also be caused by website access "
+                "or API limits."
             )
 
             with st.expander(
