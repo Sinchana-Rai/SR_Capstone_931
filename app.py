@@ -87,8 +87,7 @@ if generate_report:
 
             with st.spinner(
                 "Researching the company and generating "
-                "the sales intelligence report..."
-            ):
+                "the sales intelligence report..."):
 
                 result = run_sales_workflow(
                     product_name=product_name,
@@ -104,7 +103,64 @@ if generate_report:
 
             st.divider()
 
+            col1, col2, col3 = st.columns(3)
+
+            with col1:
+                st.metric("Product", product_name)
+
+            with col2:
+                st.metric("Product Category", product_category)
+
+            with col3:
+                st.metric("Target Customer", target_customer)
+
+            st.divider()
+
             st.markdown(result["final_report"])
+
+            st.download_button(
+                label="Download Report",
+                data=result["final_report"],
+                file_name="sales_intelligence_report.md",
+                mime="text/markdown",
+            )
+
+            # st.divider()
+
+            # with st.expander("View Individual Agent Outputs"):
+
+            #     st.subheader("Sales Agent")
+            #     st.markdown(result["sales_analysis"])
+
+            #     st.divider()
+
+            #     st.subheader("Company Research Agent")
+
+            #     st.markdown(result["research_analysis"])
+
+            #     st.divider()
+
+            #     st.subheader("Competitor Analysis Agent")
+
+            #     st.markdown(result["competitor_analysis"])
+
+            #     st.divider()
+
+            #     st.subheader("Strategy & Leadership Agent")
+
+            #     st.markdown(result["strategy_leadership_analysis"])
+
+            # with st.expander("Research Statistics"):
+
+            #     st.write(
+            #         f"Company website characters processed: "
+            #         f"{len(result['website_text'])}"
+            #     )
+
+            #     st.write(
+            #         f"Corporate research characters processed: "
+            #         f"{len(result['corporate_source_data'])}"
+            #     )
 
         except Exception as error:
 
