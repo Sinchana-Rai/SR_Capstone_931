@@ -36,40 +36,46 @@ st.subheader("Sales Opportunity Information")
 
 product_name = st.text_input(
     "Product Name",
-    value="Snowflake Data Cloud")
+    placeholder=""
+)
 
 
 company_url = st.text_input(
     "Company URL",
-    value="https://www.target.com")
+    placeholder=""
+)
 
 
 corporate_url = st.text_input(
     "Corporate Website",
-    value="https://corporate.target.com")
+    placeholder=""
+)
 
 
 product_category = st.text_input(
     "Product Category",
-    value="Cloud Data Platform")
+    placeholder=""
+)
 
 
 competitors = st.text_input(
     "Competitors",
-    value="Databricks, Google BigQuery")
+    placeholder=""
+)
 
 
 value_proposition = st.text_area(
     "Value Proposition",
-    value=(
-        "Helps organizations store, analyze, and share data "
-        "using a scalable cloud platform."
-    ))
+    placeholder=(
+        ""
+    )
+)
 
 
 target_customer = st.text_input(
     "Target Customer",
-    value="Chief Data Officer")
+    placeholder=" "
+)
 
 
 generate_report = st.button(
