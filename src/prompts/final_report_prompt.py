@@ -35,6 +35,10 @@ Rules:
 - Preserve source URLs.
 - Avoid repeating the same information across sections.
 - Do not include internal reasoning.
+- Do not interpret missing competitor information as evidence of a greenfield opportunity.
+- Do not assume the prospect uses legacy systems unless the provided research confirms it.
+- Preserve executive titles exactly as provided in the research.
+- When information is unknown, describe it as unknown rather than converting the absence of evidence into a sales conclusion.
 """
         ),
         (
