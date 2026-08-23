@@ -34,6 +34,11 @@ https://corporate.target.com
 https://corporate.target.com/about/leadership-team
 """
 
+source_urls = [
+    "https://www.target.com",
+    "https://corporate.target.com",
+    "https://corporate.target.com/about/leadership-team",
+]
 
 result = run_final_report_agent(
     product_name="Snowflake Data Cloud",
@@ -42,6 +47,7 @@ result = run_final_report_agent(
     research_analysis=research_analysis,
     competitor_analysis=competitor_analysis,
     strategy_leadership_analysis=strategy_leadership_analysis,
+    source_urls=source_urls,
 )
 
 

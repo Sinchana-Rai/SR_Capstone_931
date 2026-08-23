@@ -45,6 +45,9 @@ Rules:
 - Label unconfirmed stakeholder ownership as "Inference".
 - Do not describe corporate investment as product budget unless the source explicitly identifies budget for the product category.
 - Use "Investment Signal" instead of "Budget Availability" when only general corporate investment is confirmed.
+- In Section 9, list ONLY URLs supplied under VERIFIED SOURCE URLS.
+- Do not list agent outputs such as "Provided Sales Analysis Data",
+  "Provided Company Research Data", or similar text as sources.
 """
         ),
         (
@@ -73,6 +76,11 @@ COMPETITOR ANALYSIS
 STRATEGY AND LEADERSHIP ANALYSIS
 ========================================
 {strategy_leadership_analysis}
+
+VERIFIED SOURCE URLS
+========================================
+{verified_sources}
+========================================
 
 Create the final account intelligence report.
 """

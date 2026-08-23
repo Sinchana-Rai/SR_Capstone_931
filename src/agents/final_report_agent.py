@@ -1,3 +1,4 @@
+import re
 from langchain_groq import ChatGroq
 from langchain_core.output_parsers import StrOutputParser
 
@@ -30,6 +31,17 @@ def limit_text(text, max_characters):
 
     return text[:max_characters]
 
+def extract_urls(text):
+    """
+    Extract unique URLs from text while preserving order.
+    """
+
+    urls = re.findall(
+        r"https?://[^\s\)\]\>]+",
+        text or ""
+    )
+
+    return list(dict.fromkeys(urls))
 
 def run_final_report_agent(
     product_name,
@@ -37,7 +49,8 @@ def run_final_report_agent(
     sales_analysis,
     research_analysis,
     competitor_analysis,
-    strategy_leadership_analysis
+    strategy_leadership_analysis,
+    source_urls
 ):
     """
     Generate the final Sales Intelligence Report
@@ -53,7 +66,8 @@ def run_final_report_agent(
 
     strategy_leadership_analysis = limit_text(strategy_leadership_analysis, 5000)
 
-
+    verified_sources = "\n".join(source_urls)
+    
     res = final_report_chain.invoke(
         {
             "product_name": product_name,
@@ -61,9 +75,8 @@ def run_final_report_agent(
             "sales_analysis": sales_analysis,
             "research_analysis": research_analysis,
             "competitor_analysis": competitor_analysis,
-            "strategy_leadership_analysis": (
-                strategy_leadership_analysis
-            ),
+            "strategy_leadership_analysis": (strategy_leadership_analysis,),
+            "verified_sources": verified_sources,
         }
     )
 

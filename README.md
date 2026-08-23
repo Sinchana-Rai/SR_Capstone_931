@@ -64,69 +64,68 @@ The primary model used during development was: qwen/qwen3.6-27b
 The available Groq models were checked before selecting the model.
 
 ---
+
+### Model Selection and Justification
+
+The final application uses `qwen/qwen3.6-27b` through Groq.
+
+The model was selected after checking the models available to the
+configured Groq account.
+
+Reasons for the selection:
+
+- **Availability:** The model was available to the project's Groq account.
+- **Cost:** Groq provides usage suitable for learning and prototyping.
+- **Speed:** Groq inference provides responsive execution for an interactive Streamlit prototype.
+- **Capability:** The model handled structured sales analysis, company research, leadership extraction, competitive analysis, and report synthesis.
+- **Context handling:** It was capable of processing the cleaned web research needed by the agents.
+
+A limitation encountered was Groq's token-per-minute limit. The
+application therefore limits research and agent-output size before
+the final synthesis step.
+
+---
+
 ### System Architecture
 
-
 ```text
-                           USER
-                            |
-                            v
-                  +---------------------+
-                  | Streamlit Interface |
-                  +---------------------+
-                            |
-                            v
-                +------------------------+
-                | Sales Workflow Control |
-                +------------------------+
-                            |
-        +-------------------+-------------------+
-        |                                       |
-        v                                       v
-+----------------+                    +------------------+
-|  Sales Agent   |                    | Website Scraper  |
-+----------------+                    +------------------+
-                                            |
-                                            v
-                                   +------------------+
-                                   | Research Agent   |
-                                   +------------------+
-                                            |
-                                            v
-                                   +------------------+
-                                   | Competitor Agent |
-                                   +------------------+
-                                            |
-                                            v
-                              +---------------------------+
-                              | Corporate Link Discovery  |
-                              +---------------------------+
-                                            |
-                                            v
-                              +---------------------------+
-                              | Multi-Page Web Research   |
-                              +---------------------------+
-                                            |
-                                            v
-                         +----------------------------------+
-                         | Strategy & Leadership Agent      |
-                         +----------------------------------+
-                                            |
-                                            v
-                              +---------------------------+
-                              | Final Report Agent        |
-                              +---------------------------+
-                                            |
-                                            v
-                              +---------------------------+
-                              | Account Intelligence     |
-                              | Report                   |
-                              +---------------------------+
-                                            |
-                                            v
-                              +---------------------------+
-                              | Download Report          |
-                              +---------------------------+
+USER
+ |
+ v
+Streamlit Interface
+ |
+ v
+Sales Workflow
+ |
+ v
+Sales Agent
+ |
+ v
+Website Scraper
+ |
+ v
+Research Agent
+ |
+ v
+Competitor Agent
+ |
+ v
+Corporate Link Discovery
+ |
+ v
+Multi-Page Corporate Research
+ |
+ v
+Strategy & Leadership Agent
+ |
+ v
+Final Report Agent
+ |
+ v
+Account Intelligence Report
+ |
+ v
+Download Report
 
 Each agent has a specialized responsibility instead of asking a single LLM prompt to perform the entire task.<br>
 This makes the workflow easier to test, maintain, and extend.

@@ -6,7 +6,12 @@ from src.prompts.sales_prompt import sales_prompt
 from src.utils.output_cleaner import clean_llm_output
 
 # Create the Groq model
-model = ChatGroq(model=MODEL_ID, temperature=0)
+model = ChatGroq(
+    model=MODEL_ID,
+    temperature=0,
+    max_tokens=1200,
+    reasoning_effort="none"
+)
 
 # Convert the AI response into normal text
 parser = StrOutputParser()

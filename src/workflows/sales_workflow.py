@@ -4,7 +4,7 @@ from src.agents.competitor_agent import run_competitor_agent
 
 from src.agents.strategy_leadership_agent import (run_strategy_leadership_agent)
 from src.tools.webscraper import (fetch_website_text, build_company_research_data)
-from src.agents.final_report_agent import run_final_report_agent
+from src.agents.final_report_agent import (run_final_report_agent, extract_urls)
 
 
 def run_sales_workflow(
@@ -78,15 +78,22 @@ def run_sales_workflow(
         source_data=corporate_source_data,
     )
 
+    source_urls = extract_urls(corporate_source_data)
+
+    if company_url not in source_urls:
+        source_urls.insert(0, company_url)
+
+
     print("Step 7: Generating Final Sales Intelligence Report...")
 
     final_report = run_final_report_agent(
-        product_name=product_name,
-        company_url=company_url,
-        sales_analysis=sales_analysis,
-        research_analysis=research_analysis,
-        competitor_analysis=competitor_analysis,
-        strategy_leadership_analysis=strategy_leadership_analysis,
+    product_name=product_name,
+    company_url=company_url,
+    sales_analysis=sales_analysis,
+    research_analysis=research_analysis,
+    competitor_analysis=competitor_analysis,
+    strategy_leadership_analysis=strategy_leadership_analysis,
+    source_urls=source_urls,
     )
 
     return {
