@@ -29,7 +29,7 @@ The application transforms basic sales opportunity information into a structured
 
 ---
 ### Main Features
-- The application provides the following functionality:
+The application provides the following functionality:
 - Dynamic user input through a Streamlit UI
 - Company website scraping
 - Discovery of useful corporate research pages
@@ -127,7 +127,7 @@ Account Intelligence Report
  v
 Download Report
 
-Each agent has a specialized responsibility instead of asking a single LLM prompt to perform the entire task.<br>
+Each agent has a specialized responsibility instead of asking a single LLM prompt to perform the entire task.
 This makes the workflow easier to test, maintain, and extend.
 
 ```
