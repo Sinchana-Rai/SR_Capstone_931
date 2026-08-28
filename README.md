@@ -332,6 +332,7 @@ For example:<br>
 ```uv add beautifulsoup4```<br>
 ```uv add streamlit```<br>
 ```uv add pypdf python-docx ```<br>
+```uv add reportlab``` <br>
 
 Using uv add updates the project dependency configuration rather than requiring a manually maintained requirements.txt.
 
