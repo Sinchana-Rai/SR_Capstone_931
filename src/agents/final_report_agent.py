@@ -67,6 +67,7 @@ def run_final_report_agent(
     strategy_leadership_analysis = limit_text(strategy_leadership_analysis, 5000)
 
     verified_sources = "\n".join(source_urls)
+
     
     res = final_report_chain.invoke(
         {
@@ -75,7 +76,7 @@ def run_final_report_agent(
             "sales_analysis": sales_analysis,
             "research_analysis": research_analysis,
             "competitor_analysis": competitor_analysis,
-            "strategy_leadership_analysis": (strategy_leadership_analysis,),
+            "strategy_leadership_analysis": strategy_leadership_analysis,
             "verified_sources": verified_sources,
         }
     )
